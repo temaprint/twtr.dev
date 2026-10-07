@@ -1,6 +1,6 @@
 # twtr.dev
 
-![favicon/favicon-180x180.png](favicon/favicon-180x180.png)
+![public/favicon-128x128.png](public/favicon-128x128.png)
 
 **Connect your domain. Post as your domain. Talk to other domains.**
 
