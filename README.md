@@ -1,5 +1,7 @@
 # twtr.dev
 
+![favicon/favicon-180x180.png](favicon/favicon-180x180.png)
+
 **Connect your domain. Post as your domain. Talk to other domains.**
 
 > No usernames. No emails. No phone numbers.
