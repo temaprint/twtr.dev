@@ -1,0 +1,930 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "2f274b92-1e98-4096-b17d-7f3e870ea0c6",
+  "prevId": "2dc92931-c0c1-4797-bd1b-1676f75bb3b9",
+  "tables": {
+    "challenges": {
+      "name": "challenges",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "domain_id": {
+          "name": "domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "challenges_domain_idx": {
+          "name": "challenges_domain_idx",
+          "columns": [
+            "domain_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "challenges_domain_id_domains_id_fk": {
+          "name": "challenges_domain_id_domains_id_fk",
+          "tableFrom": "challenges",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "domains": {
+      "name": "domains",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "domains_name_idx": {
+          "name": "domains_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "follows": {
+      "name": "follows",
+      "columns": {
+        "follower_id": {
+          "name": "follower_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "followed_id": {
+          "name": "followed_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "follows_follower_id_domains_id_fk": {
+          "name": "follows_follower_id_domains_id_fk",
+          "tableFrom": "follows",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "follower_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "follows_followed_id_domains_id_fk": {
+          "name": "follows_followed_id_domains_id_fk",
+          "tableFrom": "follows",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "followed_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "follows_follower_id_followed_id_pk": {
+          "columns": [
+            "follower_id",
+            "followed_id"
+          ],
+          "name": "follows_follower_id_followed_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "identities": {
+      "name": "identities",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "domain_id": {
+          "name": "domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "fingerprint": {
+          "name": "fingerprint",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "change_type": {
+          "name": "change_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "identities_domain_idx": {
+          "name": "identities_domain_idx",
+          "columns": [
+            "domain_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "identities_domain_id_domains_id_fk": {
+          "name": "identities_domain_id_domains_id_fk",
+          "tableFrom": "identities",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "mentions": {
+      "name": "mentions",
+      "columns": {
+        "post_id": {
+          "name": "post_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "domain_id": {
+          "name": "domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "mentions_post_id_posts_id_fk": {
+          "name": "mentions_post_id_posts_id_fk",
+          "tableFrom": "mentions",
+          "tableTo": "posts",
+          "columnsFrom": [
+            "post_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "mentions_domain_id_domains_id_fk": {
+          "name": "mentions_domain_id_domains_id_fk",
+          "tableFrom": "mentions",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "mentions_post_id_domain_id_pk": {
+          "columns": [
+            "post_id",
+            "domain_id"
+          ],
+          "name": "mentions_post_id_domain_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "messages": {
+      "name": "messages",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "from_domain_id": {
+          "name": "from_domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "from_identity_id": {
+          "name": "from_identity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "to_domain_id": {
+          "name": "to_domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "text": {
+          "name": "text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "signature": {
+          "name": "signature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "read_at": {
+          "name": "read_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "messages_from_idx": {
+          "name": "messages_from_idx",
+          "columns": [
+            "from_domain_id"
+          ],
+          "isUnique": false
+        },
+        "messages_to_idx": {
+          "name": "messages_to_idx",
+          "columns": [
+            "to_domain_id"
+          ],
+          "isUnique": false
+        },
+        "messages_created_idx": {
+          "name": "messages_created_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "messages_from_domain_id_domains_id_fk": {
+          "name": "messages_from_domain_id_domains_id_fk",
+          "tableFrom": "messages",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "from_domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "messages_from_identity_id_identities_id_fk": {
+          "name": "messages_from_identity_id_identities_id_fk",
+          "tableFrom": "messages",
+          "tableTo": "identities",
+          "columnsFrom": [
+            "from_identity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "messages_to_domain_id_domains_id_fk": {
+          "name": "messages_to_domain_id_domains_id_fk",
+          "tableFrom": "messages",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "to_domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "posts": {
+      "name": "posts",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "author_domain_id": {
+          "name": "author_domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "author_identity_id": {
+          "name": "author_identity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "text": {
+          "name": "text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "reply_to_id": {
+          "name": "reply_to_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "signature": {
+          "name": "signature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "posts_author_idx": {
+          "name": "posts_author_idx",
+          "columns": [
+            "author_domain_id"
+          ],
+          "isUnique": false
+        },
+        "posts_created_idx": {
+          "name": "posts_created_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        },
+        "posts_reply_idx": {
+          "name": "posts_reply_idx",
+          "columns": [
+            "reply_to_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "posts_author_domain_id_domains_id_fk": {
+          "name": "posts_author_domain_id_domains_id_fk",
+          "tableFrom": "posts",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "author_domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "posts_author_identity_id_identities_id_fk": {
+          "name": "posts_author_identity_id_identities_id_fk",
+          "tableFrom": "posts",
+          "tableTo": "identities",
+          "columnsFrom": [
+            "author_identity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "posts_reply_to_id_posts_id_fk": {
+          "name": "posts_reply_to_id_posts_id_fk",
+          "tableFrom": "posts",
+          "tableTo": "posts",
+          "columnsFrom": [
+            "reply_to_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "qr_logins": {
+      "name": "qr_logins",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "code_hash": {
+          "name": "code_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_id": {
+          "name": "session_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "qr_logins_code_idx": {
+          "name": "qr_logins_code_idx",
+          "columns": [
+            "code_hash"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "qr_logins_session_id_sessions_id_fk": {
+          "name": "qr_logins_session_id_sessions_id_fk",
+          "tableFrom": "qr_logins",
+          "tableTo": "sessions",
+          "columnsFrom": [
+            "session_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "session_domains": {
+      "name": "session_domains",
+      "columns": {
+        "session_id": {
+          "name": "session_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "domain_id": {
+          "name": "domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "identity_id": {
+          "name": "identity_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "added_at": {
+          "name": "added_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "session_domains_domain_idx": {
+          "name": "session_domains_domain_idx",
+          "columns": [
+            "domain_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "session_domains_session_id_sessions_id_fk": {
+          "name": "session_domains_session_id_sessions_id_fk",
+          "tableFrom": "session_domains",
+          "tableTo": "sessions",
+          "columnsFrom": [
+            "session_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "session_domains_domain_id_domains_id_fk": {
+          "name": "session_domains_domain_id_domains_id_fk",
+          "tableFrom": "session_domains",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "session_domains_identity_id_identities_id_fk": {
+          "name": "session_domains_identity_id_identities_id_fk",
+          "tableFrom": "session_domains",
+          "tableTo": "identities",
+          "columnsFrom": [
+            "identity_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "session_domains_session_id_domain_id_pk": {
+          "columns": [
+            "session_id",
+            "domain_id"
+          ],
+          "name": "session_domains_session_id_domain_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "session_transfers": {
+      "name": "session_transfers",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "session_id": {
+          "name": "session_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "code_hash": {
+          "name": "code_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "used_at": {
+          "name": "used_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "session_transfers_code_idx": {
+          "name": "session_transfers_code_idx",
+          "columns": [
+            "code_hash"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "session_transfers_session_id_sessions_id_fk": {
+          "name": "session_transfers_session_id_sessions_id_fk",
+          "tableFrom": "session_transfers",
+          "tableTo": "sessions",
+          "columnsFrom": [
+            "session_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "sessions": {
+      "name": "sessions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "active_domain_id": {
+          "name": "active_domain_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "last_seen_at": {
+          "name": "last_seen_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "sessions_token_idx": {
+          "name": "sessions_token_idx",
+          "columns": [
+            "token_hash"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "sessions_active_domain_id_domains_id_fk": {
+          "name": "sessions_active_domain_id_domains_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "domains",
+          "columnsFrom": [
+            "active_domain_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

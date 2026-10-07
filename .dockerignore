@@ -1,0 +1,18 @@
+# build context / image must never contain secrets or local junk
+.git
+.gitignore
+.dockerignore
+.env
+.env.*
+!.env.example
+node_modules
+.next
+data
+logs
+*.log
+.DS_Store
+.claude
+docker-compose*.yml
+deploy.sh
+hestia
+README.md

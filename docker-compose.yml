@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    container_name: twtr-app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3006:3000"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      NODE_OPTIONS: "--max-old-space-size=432" # for the 512m container limit
+      DATABASE_URL: /app/data/twtr.db
+    volumes:
+      - twtr-data:/app/data
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: "0.50"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  twtr-data:
